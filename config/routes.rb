@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :solar_systems
+  resources :planets
+  resources :galaxies
+  resources :albums
+  resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get '/sessions/new', to: 'sessions#new', as: 'signin'
   post '/sessions', to: "session#create"
