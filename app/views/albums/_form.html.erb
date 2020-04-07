@@ -1,0 +1,24 @@
+<%= form_for(@album) do |f|%>
+    <%=f.label :title, "Title"%>
+    <%=f.text_field :title%>
+    <br>
+    <%=f.label :date, "Date"%>
+    <%=f.date_field :date%>
+    <br>
+    <%=f.label :center, "Center(location)"%>
+    <%=f.text_field :center%>
+    <br>
+    <%=f.label :creator, "Creator"%>
+    <%=f.text_field :creator%>
+    <br>
+    <%=f.label :description, "Description"%>
+    <%=f.text_area :description%>
+    <br>
+    <%=f.label :nasa_id, "Project/Nasa Id"%>
+    <%=f.text_field :nasa_id%>
+    <br>
+    <%=f.label :href, "Picture Href"%>
+    <%=f.text_field :href%>
+    <br>
+    <%=f.submit%>
+<%end%>

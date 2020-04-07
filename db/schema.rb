@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_013951) do
+ActiveRecord::Schema.define(version: 2020_04_07_163421) do
 
   create_table "albums", force: :cascade do |t|
     t.string "title"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_013951) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "href"
+    t.integer "user_id"
   end
 
   create_table "galaxies", force: :cascade do |t|
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_013951) do
     t.string "size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "album_id"
   end
 
   create_table "planets", force: :cascade do |t|
@@ -40,6 +42,8 @@ ActiveRecord::Schema.define(version: 2020_04_07_013951) do
     t.string "size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "album_id"
+    t.integer "solar_system_id"
   end
 
   create_table "solar_systems", force: :cascade do |t|
@@ -48,6 +52,8 @@ ActiveRecord::Schema.define(version: 2020_04_07_013951) do
     t.text "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "album_id"
+    t.integer "galaxy_id"
   end
 
   create_table "users", force: :cascade do |t|
