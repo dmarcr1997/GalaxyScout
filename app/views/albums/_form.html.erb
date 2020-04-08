@@ -20,5 +20,7 @@
     <%=f.label :href, "Picture Href"%>
     <%=f.text_field :href%>
     <br>
+    <%=f.label :options, "select a tag"%>
+    <%=f.select(:options, @categories.map {|value| [value, value]})%>
     <%=f.submit%>
 <%end%>

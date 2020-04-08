@@ -40,4 +40,5 @@ class Album < ApplicationRecord
             album.save
         end
     end
+
 end

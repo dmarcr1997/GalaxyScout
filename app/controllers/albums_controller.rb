@@ -2,7 +2,8 @@ class AlbumsController < ApplicationController
     before_action :require_login 
 
     def index
-        @albums = Album.all
+        @albums = Album.all.order('created_at DESC')
+
     end
 
     def show
@@ -14,13 +15,19 @@ class AlbumsController < ApplicationController
 
     def new
         @album = Album.new
+        @categories = ["Galaxy", "Solar System", "Planet", "Other"]
     end
 
     def create
-        @album = Album.build(album_params)
+        @album = Album.new(album_params)
         @album.user = current_user
         if @album.save
-            redirect_to album_path(@album)
+            if !@album.options.include?("Other")
+                session[:album_id] = @album.id
+                set_relations(params)
+            else 
+                redirect_to album_path(@album)
+            end
         else
             render 'new'
         end
@@ -50,6 +57,6 @@ class AlbumsController < ApplicationController
     
     private
     def album_params
-        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href)
+        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href, :options)
     end
 end

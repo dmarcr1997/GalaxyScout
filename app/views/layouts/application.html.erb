@@ -10,6 +10,10 @@
   </head>
 
   <body>
+  <% if flash[:alert]%>
+      <strong><%=flash[:alert]%></strong><br>
+  <%end%>
+
   <%if current_user%>
     <%=link_to 'Home', albums_path%>
     <%=link_to "#{current_user.username}'s Page'", user_path(current_user)%>
@@ -19,7 +23,7 @@
     <%=link_to 'Signin', signin_path%>
     <%=link_to 'Signup', signup_path%>
   <%end%>
-    
+  
     
     <%= yield %>
   </body>
