@@ -25,7 +25,7 @@ class Album < ApplicationRecord
 
     private
     def self.set_hash(items)
-        admin = User.find_by(:id => 2)
+        admin = User.find_by(:username => 'admin')
         items.each do |i|  
             image_hash = {}
             image_hash["href"] = i["links"][0]["href"]

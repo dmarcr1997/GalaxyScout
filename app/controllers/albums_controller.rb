@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-    # before_action require_login 
+    before_action require_login 
     def index
         @albums = Album.all
     end

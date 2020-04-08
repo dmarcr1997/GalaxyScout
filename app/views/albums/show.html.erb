@@ -11,5 +11,6 @@
 </ul>
 <%if current_user == @album.user%>
     <%=link_to "Edit your album", edit_album_path(@album)%>
+<%end%>
 <%=link_to "All Pictures", albums_path%>
 
