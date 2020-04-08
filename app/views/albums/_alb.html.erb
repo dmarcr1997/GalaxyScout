@@ -1,15 +1,10 @@
 <% show_albums.each do |image|%>
+    <div class = 'images_desc'>
     <h2>
-        <%=link_to image.title, album_path(image)%>
         <%=image_tag("#{image.href}")%>
+        <div class ='desc'>
+        <%=link_to image.title, album_path(image)%>
+        </div>
     </h2>
-    <ul>
-        <li><%=image.date%></li>
-        <li><%=image.center%></li>
-        <%if !image.creator.nil?%>
-            <li><%=image.creator%></li><br>
-        <%end%>
-        <li><%=image.description%></li>
-        <li><%=image.nasa_id%></li>
-    </ul>
-    <%end%>
+    </div>
+<%end%>

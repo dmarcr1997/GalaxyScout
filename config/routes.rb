@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get '/users/signup', to:'users#new', as:'signup'
   post '/users', to: 'users#create'
   get '/users/:id', to:'users#show', as:'user'
-
+  get '/', to:'sessions#show'
+  get '/albums/:id/delete', to:'albums#destroy', as: 'delete_album'
   resources :albums
   
   resources :galaxies, only: [:index, :show, :new, :create]

@@ -14,6 +14,9 @@ class SessionsController < ApplicationController
         end
     end
 
+    def show
+    end
+
     def destroy
         session.delete :user_id
         redirect_to signin_path

@@ -51,6 +51,7 @@ class AlbumsController < ApplicationController
             redirect_to user_path(current_user)
         else
             Album.delete(@album)
+            redirect_to albums_path
         end
     end    
     

@@ -13,18 +13,23 @@
   <% if flash[:alert]%>
       <strong><%=flash[:alert]%></strong><br>
   <%end%>
+    <ul class='navbar'>
+      <%if current_user%>
+        <li><%=link_to 'Home', albums_path%></li>
+        <li><%=link_to "#{current_user.username}'s Page'", user_path(current_user)%></li>
+        <li><%= link_to "Create New Album", new_album_path%></li>
+        <li><%=link_to "Logout", logout_path%></li>
+      <%else%>
+        <li><%=link_to 'Signin', signin_path%></li>
+        <li><%=link_to 'Signup', signup_path%></li>
+      <%end%>
+    </ul>
 
-  <%if current_user%>
-    <%=link_to 'Home', albums_path%>
-    <%=link_to "#{current_user.username}'s Page'", user_path(current_user)%>
-    <%= link_to "Create New Album", new_album_path%>
-    <%=link_to "Logout", logout_path%>
-  <%else%>
-    <%=link_to 'Signin', signin_path%>
-    <%=link_to 'Signup', signup_path%>
-  <%end%>
-  
-    
-    <%= yield %>
+    <div class = 'content'>
+      <%= yield %>
+    </div>
   </body>
+  <footer>
+  </footer>
+  
 </html>
