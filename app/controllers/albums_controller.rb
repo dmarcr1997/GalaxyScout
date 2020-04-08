@@ -2,8 +2,7 @@ class AlbumsController < ApplicationController
     before_action :require_login 
 
     def index
-        @albums = Album.all.order('created_at DESC')
-
+        @albums = Album.all.order('created_at DESC').uniq(&:title)
     end
 
     def show
