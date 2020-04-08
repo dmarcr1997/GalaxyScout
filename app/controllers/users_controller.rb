@@ -1,11 +1,5 @@
 class UsersController < ApplicationController
     
-    def show
-        @user = current_user
-        require_login
-        @albums = current_user.albums
-    end
-
     def new
         @user = User.new
     end
@@ -18,6 +12,12 @@ class UsersController < ApplicationController
         else
             render 'new'
         end
+    end
+
+    def show
+        require_login
+        @user = current_user
+        @albums = current_user.albums
     end
 
     private
