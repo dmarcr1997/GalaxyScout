@@ -19,7 +19,7 @@
     <ul class='navbar'>
       <%if current_user%>
         <li><%=link_to 'Home', albums_path%></li>
-        <li><%=link_to "#{current_user.username}'s Page'", user_path(current_user)%></li>
+        <li><%=link_to "#{current_user.username}'s Page", user_path(current_user)%></li>
         <li><%= link_to "Create New Album", new_album_path%></li>
         <li><%=link_to "Logout", logout_path%></li>
       <%else%>
