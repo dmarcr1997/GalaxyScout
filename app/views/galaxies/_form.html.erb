@@ -9,8 +9,10 @@
     <%=f.label :picture_src, "Picture Href"%>
     <%=f.text_field :picture_src%>
     <br>
-    <%=f.label :size, "Size(Leave Blank for Solar Systems)"%>
-    <%=f.text_field :size%> 
+    <%if celestial_obj.class.name != "SolarSystem"%>
+        <%=f.label :size, "Size"%>
+        <%=f.text_field :size%>
+    <%end%>
     <br>
     <%=f.submit%>
 <%end%>

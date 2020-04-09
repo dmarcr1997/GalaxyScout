@@ -8,8 +8,8 @@ class SolarSystemsController < ApplicationController
         @album = Album.find_by(id: session[:album_id])
         @solar_system = SolarSystem.new(solar_system_params)
         if @solar_system.save
-           @album.galaxies << @solar_system
-           sesssion.delete :album_id
+            @album.solar_systems << @solar_system
+           session.delete :album_id
            redirect_to user_path(current_user)
         else
             render 'new'

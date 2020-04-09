@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_192011) do
+ActiveRecord::Schema.define(version: 2020_04_09_200901) do
 
-  create_table "album_relations", force: :cascade do |t|
+  create_table "album_galaxies", force: :cascade do |t|
     t.integer "album_id"
     t.integer "galaxy_id"
-    t.integer "solar_system_id"
+  end
+
+  create_table "album_planets", force: :cascade do |t|
+    t.integer "album_id"
     t.integer "planet_id"
+  end
+
+  create_table "album_solarsystems", force: :cascade do |t|
+    t.integer "album_id"
+    t.integer "solar_system_id"
   end
 
   create_table "albums", force: :cascade do |t|
@@ -40,7 +48,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_192011) do
     t.string "size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "album_id"
   end
 
   create_table "planets", force: :cascade do |t|
@@ -50,8 +57,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_192011) do
     t.string "size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "album_id"
-    t.integer "solar_system_id"
   end
 
   create_table "solar_systems", force: :cascade do |t|
@@ -60,8 +65,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_192011) do
     t.text "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "album_id"
-    t.integer "galaxy_id"
   end
 
   create_table "users", force: :cascade do |t|

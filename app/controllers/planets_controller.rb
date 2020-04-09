@@ -6,12 +6,13 @@ class PlanetsController < ApplicationController
 
     def create
         @album = Album.find_by(id: session[:album_id])
-        @planet = Planet.new(planet_params)
+        @planet = Planet.find_or_create_by(planet_params)
         if @planet.save
-           @album.galaxies << @planet
-           sesssion.delete :album_id
+            @album.planets << @planet
+           session.delete :album_id
            redirect_to user_path(current_user)
         else
+            @album.planets.destroy(@planets)
             render 'new'
         end
     end

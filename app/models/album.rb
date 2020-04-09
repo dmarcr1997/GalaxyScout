@@ -5,10 +5,12 @@ class Album < ApplicationRecord
     validates :href, presence: true
     
     belongs_to :user
-    has_many :album_relations 
-    has_many :galaxies, through: :album_relations
-    has_many :solar_systems, through: :album_relations
-    has_many :planets, through: :album_relations
+    has_many :album_planets 
+    has_many :album_solar_systems
+    has_many :album_galaxies
+    has_many :galaxies, through: :album_galaxies
+    has_many :solar_systems, through: :album_solar_systems
+    has_many :planets, through: :album_planets
 
     def self.new_albums
         @api = Api.new

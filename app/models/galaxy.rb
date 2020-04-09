@@ -6,7 +6,5 @@ class Galaxy < ApplicationRecord
 
     has_many :album_relations
     has_many :albums, through: :album_relations
-    has_many :solar_systems
-    has_many :planets, through: :solar_systems
       
 end

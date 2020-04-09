@@ -7,8 +7,8 @@ class GalaxiesController < ApplicationController
     def create
         @album = Album.find_by(id: session[:album_id])
         @galaxy = Galaxy.find_or_create_by(galaxy_params)
-        @album.galaxies << @galaxy
         if @galaxy.save
+            @album.galaxies << @galaxy
            session.delete :album_id
            redirect_to galaxy_path(@galaxy)
         else

@@ -4,7 +4,6 @@ class Planet < ApplicationRecord
     validates :picture_src, presence: true
     validates :name, uniqueness: true
 
-    has_many :album_relations
-    has_many :albums, through: :album_relations
-    belongs_to :solar_system
+    has_many :album_planets
+    has_many :albums, through: :album_planets
 end
