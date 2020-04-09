@@ -15,9 +15,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        require_login
         @user = current_user
-        @albums = current_user.albums
+        @albums = current_user.albums.order('created_at DESC').uniq(&:title)
     end
 
     private

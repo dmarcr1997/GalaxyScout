@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_154650) do
+ActiveRecord::Schema.define(version: 2020_04_09_192011) do
+
+  create_table "album_relations", force: :cascade do |t|
+    t.integer "album_id"
+    t.integer "galaxy_id"
+    t.integer "solar_system_id"
+    t.integer "planet_id"
+  end
 
   create_table "albums", force: :cascade do |t|
     t.string "title"

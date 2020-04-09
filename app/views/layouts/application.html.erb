@@ -13,6 +13,9 @@
   <% if flash[:alert]%>
       <strong><%=flash[:alert]%></strong><br>
   <%end%>
+  <%=image_tag("homepag.jpg")%>
+  <h1>Galaxy Scout</h1>
+
     <ul class='navbar'>
       <%if current_user%>
         <li><%=link_to 'Home', albums_path%></li>
