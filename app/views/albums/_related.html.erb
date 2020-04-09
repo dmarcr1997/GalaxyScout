@@ -1,0 +1,21 @@
+<% if !celestial_obj_1.empty?%>
+    <h2>Galaxies Related to This Article</h2>
+    <% celestial_obj_1.each do |obj|%>
+        <h3><%=obj.name%></h3>
+        <%=image_tag("#{obj.picture_src}")%>
+    <%end%>
+<%end%>
+<% if !celestial_obj_2.empty?%>
+    <h2>Planets Related to This Article</h2>
+    <% celestial_obj_2.each do |obj|%>
+        <h3><%=obj.name%></h3>
+        <%=image_tag("#{obj.picture_src}")%>
+    <%end%>
+<%end%>
+<% if !celestial_obj_3.empty?%>
+    <h2>Solar Systems Related to This Article</h2>
+    <% celestial_obj_3.each do |obj|%>
+        <h3><%=obj.name%></h3>
+        <%=image_tag("#{obj.picture_src}")%>
+    <%end%>
+<%end%>

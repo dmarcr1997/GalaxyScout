@@ -13,6 +13,7 @@
     <%=link_to "Delete Picture", delete_album_path(@album)%>
     <%=link_to "Edit your album", edit_album_path(@album)%>
 <%end%>
+<%= render partial: 'related', locals: {celestial_obj_1: @galaxies, celestial_obj_2: @planets, celestial_obj_3: @solar_systems}%>
 <%=link_to "All Pictures", albums_path%>
 
 

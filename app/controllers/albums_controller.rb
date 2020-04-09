@@ -7,6 +7,9 @@ class AlbumsController < ApplicationController
 
     def show
         @album = Album.find_by(id: params[:id])
+        @galaxies = @album.galaxies.uniq(&:name)
+        @solar_systems = @album.solar_systems.uniq(&:name)
+        @planets = @album.planets.uniq(&:name)
         if @album.nil?
             redirect_to albums_path
         end
