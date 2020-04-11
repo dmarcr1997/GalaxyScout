@@ -9,8 +9,9 @@ class GalaxiesController < ApplicationController
         @galaxy = Galaxy.find_or_create_by(galaxy_params)
         if @galaxy.save
             @album.galaxies << @galaxy
+            @album.save
            session.delete :album_id
-           redirect_to galaxy_path(@galaxy)
+           redirect_to album_path(@album)
         else
             render 'new'
         end

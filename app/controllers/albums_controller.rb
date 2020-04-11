@@ -8,7 +8,7 @@ class AlbumsController < ApplicationController
     def show
         @album = Album.find_by(id: params[:id])
         @galaxies = @album.galaxies.uniq(&:name)
-        @solar_systems = @album.solar_systems.uniq(&:name)
+        @space_objs = @album.space_objs.uniq(&:name)
         @planets = @album.planets.uniq(&:name)
         if @album.nil?
             redirect_to albums_path
@@ -17,7 +17,7 @@ class AlbumsController < ApplicationController
 
     def new
         @album = Album.new
-        @categories = ["Galaxy", "Solar System", "Planet", "Other"]
+       
     end
 
     def create
@@ -31,6 +31,7 @@ class AlbumsController < ApplicationController
                 redirect_to album_path(@album)
             end
         else
+            # @categories = ["Galaxy", "Space Object", "Planet", "Other"]
             render 'new'
         end
     end
@@ -40,10 +41,16 @@ class AlbumsController < ApplicationController
     end
 
     def update
-        @album = Album.update(album_params)
+        @album = Album.find_by(:id => params[:id])
+        @album.update(album_params)
         if @album.save
-            redirect_to album_path(@album)
-        else
+            if !@album.options.include?("Other")
+                session[:album_id] = @album.id
+                set_relations(params)
+            else
+                redirect_to album_path(@album)
+            end
+        else            
             render 'edit'
         end
     end

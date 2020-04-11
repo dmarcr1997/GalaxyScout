@@ -1,4 +1,4 @@
-<%= form_for(@album) do |f|%>
+<%= form_for(album) do |f|%>
     <%=f.label :title, "Title"%>
     <%=f.text_field :title%>
     <br>
@@ -21,6 +21,6 @@
     <%=f.text_field :href%>
     <br>
     <%=f.label :options, "select a tag"%>
-    <%=f.select(:options, @categories.map {|value| [value, value]})%>
+    <%=f.select(:options, categories.map {|value| [value, value]})%>
     <%=f.submit%>
 <%end%>

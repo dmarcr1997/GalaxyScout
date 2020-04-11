@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :require_login, :search_album, :set_relations
+    helper_method :current_user, :require_login, :search_album, :set_relations, :categories
     def current_user
         User.find_by(id: session[:user_id])
     end
@@ -16,10 +16,14 @@ class ApplicationController < ActionController::Base
     def set_relations(params)
         if params[:album][:options] == "Galaxy"
             redirect_to new_galaxy_path
-        elsif params[:album][:options] == "Solar System"
-            redirect_to new_solar_system_path
+        elsif params[:album][:options] == "Space Object"
+            redirect_to new_space_obj_path
         else
             redirect_to new_planet_path
         end
+    end
+
+    def categories
+        @categories = ["Galaxy", "Space Object", "Planet", "Other"]
     end
 end

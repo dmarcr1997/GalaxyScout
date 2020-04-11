@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   
   resources :galaxies, only: [:index, :show, :new, :create]
   
-  resources :solar_systems, only: [:index, :show, :new, :create]
+  resources :space_objs, only: [:index, :show, :new, :create]
   
   resources :planets, only: [:index, :show, :new, :create]
   

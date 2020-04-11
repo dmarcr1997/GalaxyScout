@@ -9,8 +9,9 @@ class PlanetsController < ApplicationController
         @planet = Planet.find_or_create_by(planet_params)
         if @planet.save
             @album.planets << @planet
+            @album.save
            session.delete :album_id
-           redirect_to user_path(current_user)
+           redirect_to album_path(@album)
         else
             @album.planets.destroy(@planets)
             render 'new'

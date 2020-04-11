@@ -13,9 +13,9 @@
     <%end%>
 <%end%>
 <% if !celestial_obj_3.empty?%>
-    <h2>Solar Systems Related to This Article</h2>
+    <h2>Other Objects Related to This Article</h2>
     <% celestial_obj_3.each do |obj|%>
-        <h3><%=link_to obj.name, solar_system_path(obj)%></h3>
+        <h3><%=link_to obj.name, space_obj_path(obj)%></h3>
         <%=image_tag("#{obj.picture_src}")%>
     <%end%>
 <%end%>

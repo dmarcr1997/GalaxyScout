@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_200901) do
+ActiveRecord::Schema.define(version: 2020_04_11_174117) do
 
   create_table "album_galaxies", force: :cascade do |t|
     t.integer "album_id"
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 2020_04_09_200901) do
     t.integer "planet_id"
   end
 
-  create_table "album_solarsystems", force: :cascade do |t|
+  create_table "album_space_objs", force: :cascade do |t|
     t.integer "album_id"
-    t.integer "solar_system_id"
+    t.integer "space_obj_id"
   end
 
   create_table "albums", force: :cascade do |t|
@@ -59,12 +59,13 @@ ActiveRecord::Schema.define(version: 2020_04_09_200901) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "solar_systems", force: :cascade do |t|
+  create_table "space_objs", force: :cascade do |t|
     t.string "name"
     t.string "picture_src"
     t.text "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "size"
   end
 
   create_table "users", force: :cascade do |t|
