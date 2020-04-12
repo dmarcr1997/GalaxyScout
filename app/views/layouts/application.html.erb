@@ -6,27 +6,37 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  <% if flash[:alert]%>
-      <strong><%=flash[:alert]%></strong><br>
-  <%end%>
-  <%=image_tag("homepag.jpg")%>
-  <h1>Galaxy Scout</h1>
-
-    <ul class='navbar'>
-      <%if current_user%>
-        <li><%=link_to 'Home', albums_path%></li>
-        <li><%=link_to "#{current_user.username}'s Page", user_path(current_user)%></li>
-        <li><%= link_to "Create New Album", new_album_path%></li>
-        <li><%=link_to "Logout", logout_path%></li>
-      <%else%>
-        <li><%=link_to 'Signin', signin_path%></li>
-        <li><%=link_to 'Signup', signup_path%></li>
+    <div class = 'alert'>
+      <% if flash[:alert]%>
+        <strong><%=flash[:alert]%></strong><br>
       <%end%>
-    </ul>
+    </div>
+    <div class = 'header'>
+      <%=image_tag("homepag.jpg")%>
+      <div class = 'header_text'>
+        <h1>Galaxy Scout</h1>
+      </div>
+    </div>
+
+    <div class='icon-bar'>
+        <%if current_user%>
+          <a class ="active" href=<%=albums_path%>><i class = "fa fa-home"></i></a>
+          <a href=<%=user_path(current_user)%>><i class="fa fa-user-circle"></i></a>
+          <a href=<%=new_album_path%>><i class="fa fa-paper-plane"></i></a>
+          <a href=<%=logout_path%>><i class ="fa fa-user-times"></i></a>
+        <%else%>
+          <a href='/'><i class ="fa fa-home"></i></a>
+          <a href=<%=signin_path%>><i class ="fa fa-user-circle"></i></a>
+          <a href=<%=signup_path%>><i class="fa fa-vcard"></i></a>
+        <%end%>
+    </div>
+
+    
 
     <div class = 'content'>
       <%= yield %>
@@ -34,5 +44,4 @@
   </body>
   <footer>
   </footer>
-  
 </html>
