@@ -2,7 +2,17 @@ class AlbumsController < ApplicationController
     before_action :require_login 
 
     def index
-        @albums = Album.all.order('created_at DESC').uniq(&:title)
+        if params.include?(:search)
+            Album.search_albums(params[:search])
+            admin = User.find_by(:username => 'admin')
+            @albums = admin.albums.uniq(&:title)
+            if @albums.nil?
+                flash[:alert] = "Sorry Nothing matches that search"
+            end
+        else
+            Album.new_albums
+            @albums = Album.all.order('created_at DESC').uniq(&:title)
+        end
     end
 
     def show

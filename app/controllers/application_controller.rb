@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :require_login, :search_album, :set_relations, :categories
+    helper_method :current_user, :require_login, :search_album, :set_relations, :categories, :search_user_albums
     def current_user
         User.find_by(id: session[:user_id])
     end
@@ -8,10 +8,17 @@ class ApplicationController < ActionController::Base
         redirect_to signin_path, alert: 'Must be Logged in to view this action' if current_user.nil?
     end
 
-    def search_album
-        @albums = Album.search_albums(params[:search])
-        # add database partial search here
+    def search_user_albums(search)
+        @albums = []
+        Album.where("title like ?", "%#{search}%").each do |album|
+            if album.user_id != 20
+                @albums << album
+            end
+        end
+        binding.pry
+        @albums
     end 
+    
 
     def set_relations(params)
         if params[:album][:options] == "Galaxy"

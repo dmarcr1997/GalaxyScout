@@ -18,8 +18,14 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = current_user
-        @albums = current_user.albums.order('created_at DESC').uniq(&:title)
+        if params[:search]
+            @albums = search_user_albums(params[:search])
+            if @albums.empty?
+                flash[:alert] = "Sorry Nothing matches that search"
+            end
+        else  
+            @albums = current_user.albums.order('created_at DESC').uniq(&:title)
+        end
     end
 
     private
