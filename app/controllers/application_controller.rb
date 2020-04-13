@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
                 @albums << album
             end
         end
-        binding.pry
         @albums
     end 
     

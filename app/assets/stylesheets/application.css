@@ -47,7 +47,7 @@
 
 .icon-bar {
    z-index:99;
-   width: 90px; /* Set a specific width */
+   width: 9%; /* Set a specific width */
    background-color: #555; /* Dark-grey background */
    position: fixed;
  }
@@ -55,7 +55,7 @@
  .icon-bar a {
    display: block; /* Make the links appear below each other instead of side-by-side */
    text-align: center; /* Center-align text */
-   padding: 16px; /* Add some padding */
+   padding: 10%; /* Add some padding */
    transition: all 0.3s ease; /* Add transition for hover effects */
    color: white; /* White text color */
    font-size: 36px; /* Increased font-size */
@@ -69,10 +69,14 @@
    background-color: #4CAF50; /* Add an active/current color */
  }
 
- .search input[type=text], input[type=submit]{
-  width: 50px;
-  align-self: center;
-    
+.search a{
+  padding-right: 0%;
+  padding-left: 0%;
+}
+.searchbar{
+  width: 20%;
+  padding-left: 0%;
+  text-align: center;
 }
  div.content {
    margin-left: 100px;
@@ -178,7 +182,7 @@
   text-align: justify;
   text-decoration: goldenrod underline;
   color: #ddd;
-  font-size: 1.75em;
+  font-size: 1em;
 }
 
 

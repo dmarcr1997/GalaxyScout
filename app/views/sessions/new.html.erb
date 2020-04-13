@@ -1,8 +1,8 @@
 <div class ="container">
 <%=form_for @user, url: sessions_path, method: 'post' do |f|%>
     <div class = 'row'>
-    <%=f.label :username, "Username"%>
-    <%=f.text_field :username%>
+    <%=f.label :email, "Email"%>
+    <%=f.text_field :email%>
     <br>
     <%=f.label :password, "Password"%>
     <%=f.password_field :password%>
@@ -10,6 +10,9 @@
     </div>
     <div class = 'row'>
         <%=f.submit 'Signin'%>
-    </div>
 <%end%>
+<div class = 'facebook_login_button'>
+<%= link_to('Log in with Facebook!', '/auth/facebook') %>
+</div>
+</div>
 </div>
