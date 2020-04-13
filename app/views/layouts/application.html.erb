@@ -22,12 +22,25 @@
         <h1>Galaxy Scout</h1>
       </div>
     </div>
-
+    <br>
     <div class='icon-bar'>
         <%if current_user%>
           <a class ="active" href=<%=albums_path%>><i class = "fa fa-home"></i></a>
           <a href=<%=user_path(current_user)%>><i class="fa fa-user-circle"></i></a>
           <a href=<%=new_album_path%>><i class="fa fa-paper-plane"></i></a>
+          <a><i class='fa fa-search'>
+          <%if current_page?(user_path(current_user))%>
+            <%=form_tag user_path(current_user), method: "get" do%>
+              <%=text_field_tag "search"%>
+              <%=submit_tag "Search User Albums", :style => "display: none;"%>
+            <%end%>
+          <%else%>
+            <%=form_tag albums_path, method: "get" do%>
+              <%=text_field_tag "search"%>
+              <%=submit_tag "Search Database", :style => "display: none;"%>
+            <%end%>
+          <%end%>
+          </i></a>
           <a href=<%=logout_path%>><i class ="fa fa-user-times"></i></a>
         <%else%>
           <a href='/'><i class ="fa fa-home"></i></a>

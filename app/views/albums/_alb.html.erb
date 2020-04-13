@@ -1,10 +1,13 @@
+<div class='img_row'>
 <% show_albums.each do |image|%>
-    <div class = 'images_desc'>
+    <div class = 'img_col'>
     <h2>
         <%=image_tag("#{image.href}")%>
-        <div class ='desc'>
+        <br>
+        <div class = 'img_txt'>
         <%=link_to image.title, album_path(image)%>
         </div>
     </h2>
     </div>
 <%end%>
+</div>

@@ -1,6 +1,12 @@
+
+<div class = 'display_img'> 
+<%=image_tag("#{@album.href}")%>
+</div>
+<br>
+<div class = 'display_text'>
 <h2><%=@album.title%></h2>
 <br>
-<%=image_tag("#{@album.href}")%>
+
 <ul>
 <li>Date: <%=@album.date%></li>
 <li>Center: <%=@album.center%></li>
@@ -15,6 +21,6 @@
 <%end%>
 <%=link_to "All Pictures", albums_path%>
 <%= render partial: 'related', locals: {celestial_obj_1: @galaxies, celestial_obj_2: @planets, celestial_obj_3: @space_objs}%>
-
+</div>
 
 

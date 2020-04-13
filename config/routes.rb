@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   get '/users/:id', to:'users#show', as:'user'
   get '/', to:'sessions#show'
   get '/albums/:id/delete', to:'albums#destroy', as: 'delete_album'
-  resources :albums
+  resources :albums do 
+    resources :galaxies, only: [:index, :show, :new, :create]
   
-  resources :galaxies, only: [:index, :show, :new, :create]
-  
-  resources :space_objs, only: [:index, :show, :new, :create]
-  
-  resources :planets, only: [:index, :show, :new, :create]
+    resources :space_objs, only: [:index, :show, :new, :create]
+    
+    resources :planets, only: [:index, :show, :new, :create]
+  end
   
 end

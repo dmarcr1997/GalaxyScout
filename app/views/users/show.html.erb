@@ -1,12 +1,11 @@
+<div class = 'username_header'>
 <h1><%=current_user.username%></h1>
-<%=form_tag user_path(current_user), method: "get" do%>
-    <%=label_tag "search"%>
-    <%=text_field_tag "search"%>
-    <%=submit_tag "Search User Albums"%>
-<%end%>
-
-<%if !current_user.albums.nil?%>
+</div>
+<%if !current_user.albums.empty?%>
     <%=render partial:'albums/alb', locals: {show_albums: @albums}%>
 <%else%>
-    <%=  link_to "No Albums Yet. Create One.", new_album_path%>
+    <div class = 'create_new_button'>
+        <%= link_to "No Albums Yet. Create One.", new_album_path%>
+    </div>
 <%end%>
+</div>

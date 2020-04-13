@@ -1,11 +1,19 @@
+<div class ="container">
 <%= form_for(@user) do |f|%>
+    <div class = 'row'>
     <%=f.label :username, "Username"%>
     <%=f.text_field :username%>
     <br>
     <%=f.label :password, "Password"%>
     <%=f.password_field :password%>
     <br>
-    <%=f.label :password_confirmation, "Password Confirmation"%>
+    </div>
+    <div class = 'row'>
+    <%=f.label :password_confirmation, "Password Conf."%>
     <%=f.password_field :password_confirmation%>
-    <%=f.submit%>
+    </div>
+    <div class = 'row'>
+        <%=f.submit%>
+    </div>
 <%end%>
+</div>

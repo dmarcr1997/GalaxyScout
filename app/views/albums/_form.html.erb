@@ -22,5 +22,6 @@
     <br>
     <%=f.label :options, "select a tag"%>
     <%=f.select(:options, categories.map {|value| [value, value]})%>
+    <br>
     <%=f.submit%>
 <%end%>

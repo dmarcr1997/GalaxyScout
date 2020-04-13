@@ -1,5 +1,6 @@
 <h1>New <%=celestial_obj.class.name%></h1> 
 <%= form_for celestial_obj do |f|%>
+    <%=f.hidden_filed :album_id, album.id%>
     <%=f.label :name, "Name"%>
     <%=f.text_field :name%>
     <br>
