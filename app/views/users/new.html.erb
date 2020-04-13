@@ -1,8 +1,15 @@
 <div class ="container">
+<h2>Sign Up</h2>
 <%= form_for(@user) do |f|%>
     <div class = 'row'>
-    <%=f.label :username, "Username"%>
-    <%=f.text_field :username%>
+    <%=f.label :email, "Email"%>
+    <%=f.text_field :email%>
+    <br>
+    <%=f.label :name, "Name"%>
+    <%=f.text_field :name%>
+    <br>
+    <%=f.label :image, "Image Src"%>
+    <%=f.text_field :image%>
     <br>
     <%=f.label :password, "Password"%>
     <%=f.password_field :password%>
@@ -14,6 +21,9 @@
     </div>
     <div class = 'row'>
         <%=f.submit%>
-    </div>
 <%end%>
+<div class = 'facebook_login_button'>
+<%= link_to('Signup with Facebook!', '/auth/facebook') %>
+</div>
+</div>
 </div>

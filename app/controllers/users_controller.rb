@@ -5,15 +5,19 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
-        if @user.username == "admin"
-           flash[:alert] = "Cannot use admin as username" 
-           render 'new'
-        elsif @user.save
-            session[:user_id] = @user.id
-            redirect_to user_path(@user)
+        if auth['info']
+            facebook_sign
         else
-            render 'new'
+            @user = User.new(user_params)
+            if @user.username == "admin"
+                flash[:alert] = "Cannot use admin as username" 
+                render 'new'
+            elsif @user.save
+                session[:user_id] = @user.id
+                redirect_to user_path(@user)
+            else
+                render 'new'
+            end
         end
     end
 

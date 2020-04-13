@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :require_login, :search_album, :set_relations, :categories, :search_user_albums
+    helper_method :current_user, :require_login, :search_album, :set_relations, :categories, :search_user_albums, :facebook_sign
     def current_user
         User.find_by(id: session[:user_id])
     end
@@ -31,5 +31,24 @@ class ApplicationController < ActionController::Base
 
     def categories
         @categories = ["Galaxy", "Space Object", "Planet", "Other"]
+    end
+
+    def auth
+        request.env['omniauth.auth']
+    end
+
+    def facebook_sign
+        @user = User.find_or_create_by(uid: auth['uid']) do |u|
+            u.name = auth['info']['name']
+            u.email = auth['info']['email']
+            u.image = auth['info']['image']
+            u.password = auth['uid']
+        end
+        if @user.save
+            session[:user_id] = @user.id
+            redirect_to user_path(current_user)
+        else
+            redirect_to signin_path, alert: 'User could not be found'
+        end
     end
 end
