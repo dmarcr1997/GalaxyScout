@@ -11,7 +11,7 @@ gem 'pry'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
-# Use sqlite3 as the database for Active Record
+# Use pg as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
