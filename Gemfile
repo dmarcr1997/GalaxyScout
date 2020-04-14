@@ -10,7 +10,6 @@ gem 'dotenv-rails'
 gem 'pry'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-google'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
