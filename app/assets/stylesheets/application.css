@@ -245,3 +245,34 @@ ul.album_info {
   list-style-type: none;
 }
 
+  /* The alert message box */
+  div.alert {
+    padding: 5px;
+    margin-bottom: 10px;
+    color:white;
+ }
+
+ /* The close button */
+ .alert .closebtn {
+    margin-left: 15px;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    color:red;
+ }
+
+ /* When moving the mouse over the close button */
+ .closebtn:hover {
+    color: black;
+ }
+ 
+ .img_buttons {
+   background-color: whitesmoke;
+   border: yellow solid .1em;
+   border-radius: 1em;
+   width: 50%;
+   text-align: center;
+ }

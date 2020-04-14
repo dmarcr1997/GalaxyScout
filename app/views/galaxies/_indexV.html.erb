@@ -1,0 +1,13 @@
+<div class='img_row'>
+<% celestial_objs.each do |obj|%>
+    <div class = 'img_col'>
+    <h2>
+        <%=image_tag("#{obj.picture_src}")%>
+        <br>
+        <div class = 'img_txt'>
+        <%=link_to obj.name, "/#{link}/obj.id"%>
+        </div>
+    </h2>
+    </div>
+<%end%>
+</div>

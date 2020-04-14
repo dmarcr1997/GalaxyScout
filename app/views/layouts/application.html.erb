@@ -11,9 +11,15 @@
   </head>
 
   <body>
-    <div class = 'alert'>
       <% if flash[:alert]%>
-        <strong><%=flash[:alert]%></strong><br>
+        <%  flash.keys.each do |type| %>
+          <div class='alert'>
+          <div data-alert class="flash <%= type %> alert-box radius">
+            <%= flash[type] %>
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          </div>
+  <% end %>
+  
       <%end%>
     </div>
     <div class = 'header'>

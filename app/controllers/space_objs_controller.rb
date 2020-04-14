@@ -19,7 +19,7 @@ class SpaceObjsController < ApplicationController
     end
 
     def create
-        @album = Album.find_by(id: params[:album_id])
+        @album = Album.find_by(id: params[:space_obj][:album_id])
         if @album.nil?
             redirect_to albums_path, alert: "Album not found"
         end

@@ -1,9 +1,13 @@
-<h1>
-<%=@galaxy.name%>
-<br>
-<%=image_tag("#{@galaxy.picture_src}")%>
-</h1>
-<h3>Size:<%=@galaxy.size%></h3>
-<p>
-<%=@galaxy.bio%>
-</p>
+<div class = 'display_img'>
+    <%=image_tag("#{@galaxy.picture_src}")%>
+    <br>
+    <div class = 'display_text'>
+        <h2>
+        <%=@galaxy.name%>
+        </h2>
+    </div>
+    <ul class = 'album_info'>
+        <li>Size:<%=@galaxy.size%></li>
+        <li><%=@galaxy.bio%></li>
+    </ul>
+</div>

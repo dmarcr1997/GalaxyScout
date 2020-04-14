@@ -19,13 +19,13 @@ class ApplicationController < ActionController::Base
     end 
     
 
-    def set_relations(params)
-        if params[:album][:options] == "Galaxy"
-            redirect_to new_galaxy_path
-        elsif params[:album][:options] == "Space Object"
-            redirect_to new_space_obj_path
+    def set_relations(album)
+        if album.options == "Galaxy"
+            redirect_to "/albums/#{album.id}/galaxies/new"
+        elsif album.options == "Space Object"
+            redirect_to "/albums/#{album.id}/space_objs/new"
         else
-            redirect_to new_planet_path
+            redirect_to "/albums/#{album.id}/planets/new"
         end
     end
 

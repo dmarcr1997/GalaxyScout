@@ -10,11 +10,15 @@ Rails.application.routes.draw do
   get '/albums/:id/delete', to:'albums#destroy', as: 'delete_album'
   get '/auth/facebook/callback' => 'sessions#create'
   resources :albums do 
-    resources :galaxies, only: [:index, :show, :new, :create]
+    resources :galaxies, only: [:index, :new]
   
-    resources :space_objs, only: [:index, :show, :new, :create]
+    resources :space_objs, only: [:index, :new]
     
-    resources :planets, only: [:index, :show, :new, :create]
+    resources :planets, only: [:index, :new]
   end
+  resources :galaxies, only: [:show, :create] 
   
+  resources :space_objs, only: [:show, :create]
+
+  resources :planets, only: [:show, :create]
 end

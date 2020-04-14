@@ -1,8 +1,13 @@
-<h1>
-<%=@space_obj.name%>
-<br>
-<%=image_tag("#{@space_obj.picture_src}")%>
-</h1>
-<p>
-<%=@space_obj.bio%>
-</p>
+<div class = 'display_img'>
+    <%=image_tag("#{@space_obj.picture_src}")%>
+    <br>
+    <div class = 'display_text'>
+        <h2>
+        <%=@space_obj.name%>
+        </h2>
+    </div>
+    <ul class = 'album_info'>
+        <li>Size:<%=@space_obj.size%></li>
+        <li><%=@space_obj.bio%></li>
+    </ul>
+</div>

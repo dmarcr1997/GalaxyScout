@@ -18,7 +18,7 @@ class PlanetsController < ApplicationController
         end
     end
     def create
-        @album = Album.find_by(id: session[:album_id])
+        @album = Album.find_by(id: params[:planet][:album_id])
         if @album.nil?
             redirect_to albums_path, alert: "Album not found"
         end

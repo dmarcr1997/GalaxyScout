@@ -36,7 +36,7 @@ class AlbumsController < ApplicationController
         if @album.save
             if !@album.options.include?("Other")
                 session[:album_id] = @album.id
-                set_relations(params)
+                set_relations(@album)
             else 
                 redirect_to album_path(@album)
             end
@@ -56,7 +56,7 @@ class AlbumsController < ApplicationController
         if @album.save
             if !@album.options.include?("Other")
                 session[:album_id] = @album.id
-                set_relations(params)
+                set_relations(@album)
             else
                 redirect_to album_path(@album)
             end
