@@ -10,9 +10,9 @@ gem 'dotenv-rails'
 gem 'pry'
 gem 'omniauth'
 gem 'omniauth-facebook'
-
-# Use pg as the database for Active Record
-gem 'pg'
+gem 'yarn'
+# Use sqlit3 as the database for Active Record
+gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets

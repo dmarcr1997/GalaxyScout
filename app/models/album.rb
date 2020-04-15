@@ -1,5 +1,6 @@
 class Album < ApplicationRecord
     validates :title, presence: true
+    validates :title, uniqueness: true
     validates :date, presence: true
     validates :description, presence: true
     validates :href, presence: true
@@ -28,7 +29,7 @@ class Album < ApplicationRecord
 
     private
     def self.set_hash(items)
-        admin = User.find_by(:id => 20)
+        admin = User.find_by(:id => 1)
         admin.albums.delete_all
         items.each do |i|  
             image_hash = {}

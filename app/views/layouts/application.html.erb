@@ -34,9 +34,7 @@
           <a class ="active" href=<%=albums_path%>><i class = "fa fa-home"></i></a>
           <a href=<%=user_path(current_user)%>><i class="fa fa-user-circle"></i></a>
           <a href=<%=new_album_path%>><i class="fa fa-paper-plane"></i></a>
-          <div class='search'>
           <a><i class='fa fa-search'>
-          <div class = 'searchbar'>
           <%if current_page?(user_path(current_user))%>
             <%=form_tag user_path(current_user), method: "get" do%>
               <%=text_field_tag "search"%>
@@ -48,9 +46,7 @@
               <%=submit_tag "Search Database", :style => "display: none;"%>
             <%end%>
           <%end%>
-          </div>
           </i></a>
-          </div>
           <a href=<%=logout_path%>><i class ="fa fa-user-times"></i></a>
         <%else%>
           <a href='/'><i class ="fa fa-home"></i></a>
