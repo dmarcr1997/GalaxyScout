@@ -21,16 +21,20 @@ class Album < ApplicationRecord
     end
 
     def self.search_albums(search)
-        @api = Api.new        
-        @items = @api.fetch("#{search}")
-        @all_items = @items["collection"]["items"]
-        self.set_hash(@all_items)
+        @api = Api.new     
+        if @api.nil? || @api.empty?
+            return
+        else   
+            @items = @api.fetch("#{search}")
+            @all_items = @items["collection"]["items"]
+            self.set_hash(@all_items)
+        end
     end
 
     private
     def self.set_hash(items)
-        admin = User.find_by(:id => 1)
-        admin.albums.delete_all
+        super_user = User.admin
+        super_user.albums.delete_all
         items.each do |i|  
             image_hash = {}
             image_hash["href"] = i["links"][0]["href"]
@@ -41,7 +45,7 @@ class Album < ApplicationRecord
             image_hash["description"] = i["data"][0]["description"] 
             image_hash["nasa_id"] = i["data"][0]["nasa_id"]
             album = Album.find_or_create_by(image_hash) 
-            album.user = admin
+            album.user = super_user
             album.save
         end
     end

@@ -54,7 +54,7 @@ body{
   position: fixed;
 }
 
-.icon-bar a, input[type=text] {
+.icon-bar a, .icon-bar input[type=text] {
   display: block; /* Make the links appear below each other instead of side-by-side */
   text-align: center; /* Center-align text */
   padding: 10%; /* Add some padding */

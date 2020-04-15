@@ -4,8 +4,8 @@ class AlbumsController < ApplicationController
     def index
         if params.include?(:search)
             Album.search_albums(params[:search])
-            admin = User.find_by(:id => 20)
-            @albums = admin.albums.uniq(&:title)
+            super_user = User.admin
+            @albums = super_user.albums.uniq(&:title)
             if @albums.nil?
                 flash[:alert] = "Sorry Nothing matches that search"
             end
@@ -41,7 +41,6 @@ class AlbumsController < ApplicationController
                 redirect_to album_path(@album)
             end
         else
-            # @categories = ["Galaxy", "Space Object", "Planet", "Other"]
             render 'new'
         end
     end
