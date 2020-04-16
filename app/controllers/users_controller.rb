@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        @admin = User.find_by(id: 1)
         if params[:search]
             @albums = search_user_albums(params[:search])
             if @albums.empty?

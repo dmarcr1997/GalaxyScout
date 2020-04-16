@@ -3,10 +3,10 @@ class AlbumsController < ApplicationController
 
     def index
         if params.include?(:search)
-            @search = Album.search_albums(params[:search])
-            super_user = User.admin
+            Album.search_albums(params[:search])
+            super_user = User.find_by(id: 1)
             @albums = super_user.albums.uniq(&:title)
-            if @search.nil?
+            if @albums.nil? || @albums.empty?
                 flash[:alert] = "Sorry Nothing matches that search"
             end
         else

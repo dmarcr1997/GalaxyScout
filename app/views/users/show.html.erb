@@ -1,5 +1,5 @@
 <div class = 'username_header'>
-<h1><%if current_user.id == User.admin.id%> 
+<h1><%if current_user.id == @admin.id%> 
         <i class='fa fa-cogs'></i> 
     <%else%>
         <%if !current_user.image.nil?%>

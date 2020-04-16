@@ -1,6 +1,5 @@
 class Album < ApplicationRecord
     validates :title, presence: true
-    validates :title, uniqueness: true
     validates :date, presence: true
     validates :description, presence: true
     validates :href, presence: true
@@ -17,40 +16,38 @@ class Album < ApplicationRecord
         @api = Api.new
         @items = @api.fetch("")
         @all_items = @items["collection"]["items"]
-        self.set_hash(@all_items)
+        Album.set_hash(@all_items, false)
     end
 
     def self.search_albums(search)
         @api = Api.new     
         @items = @api.fetch("#{search}")
-        if @items.nil? || @items.empty?
-            return nil
-        else    
-            @all_items = @items["collection"]["items"]
-            self.set_hash(@all_items)
-        end
+        @all_items = @items["collection"]["items"]
+        Album.set_hash(@all_items, true)
     end
 
     private
-    def self.set_hash(items)
-        if items == nil
-            return nil
-        else
-            super_user = User.admin
-            super_user.albums.delete_all
-            items.each do |i|  
-                image_hash = {}
-                image_hash["href"] = i["links"][0]["href"]
-                image_hash["title"] = i["data"][0]["title"]
-                image_hash["date"] = i["data"][0]["date_created"]
-                image_hash["center"] = i["data"][0]["center"]
-                image_hash["creator"] = i["data"][0]["secondary_creator"]
-                image_hash["description"] = i["data"][0]["description"] 
-                image_hash["nasa_id"] = i["data"][0]["nasa_id"]
-                album = Album.find_or_create_by(image_hash) 
-                if album.save
-                    album.user = super_user
-                end
+    def self.set_hash(items, s)
+        if s == true
+            count = 0
+        end
+        admin = User.find_by(id: 1)
+        admin.albums.delete_all
+        items.each do |i|
+            image_hash = {}
+            image_hash["title"] = i["data"][0]["title"]
+            image_hash["date"] = i["data"][0]["date_created"]
+            image_hash["center"] = i["data"][0]["center"]
+            image_hash["creator"] = i["data"][0]["secondary_creator"]
+            image_hash["description"] = i["data"][0]["description"] 
+            image_hash["nasa_id"] = i["data"][0]["nasa_id"]
+            image_hash["href"] = i["links"][0]["href"]
+            album = Album.new(image_hash)
+            album.user = admin 
+            album.save
+            if s == true
+                break if count == 20
+                count +=1
             end
         end
     end

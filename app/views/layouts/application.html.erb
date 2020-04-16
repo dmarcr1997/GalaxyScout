@@ -37,12 +37,12 @@
           <a><i class='fa fa-search'>
           <%if current_page?(user_path(current_user))%>
             <%=form_tag user_path(current_user), method: "get" do%>
-              <%=text_field_tag "search"%>
+              <%=text_field_tag :search%>
               <%=submit_tag "Search User Albums", :style => "display: none;"%>
             <%end%>
           <%else%>
             <%=form_tag albums_path, method: "get" do%>
-              <%=text_field_tag "search"%>
+              <%=text_field_tag :search%>
               <%=submit_tag "Search Database", :style => "display: none;"%>
             <%end%>
           <%end%>
