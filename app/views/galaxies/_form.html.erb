@@ -1,5 +1,6 @@
 <div class = 'container'>
 <h1>New <%=celestial_obj.class.name%></h1> 
+<%= render partial: 'users/errors', locals: {item: celestial_obj}%>
 <%= form_for celestial_obj do |f|%>
     <%=f.hidden_field :album_id, :value => obj_album.id%>
     <%=f.label :name, "Name"%>

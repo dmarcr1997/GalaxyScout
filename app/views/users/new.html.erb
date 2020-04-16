@@ -1,5 +1,6 @@
 <div class ="container">
 <h2>Sign Up</h2>
+<%= render partial:'errors', locals: {item: @user}%>
 <%= form_for(@user) do |f|%>
     <div class = 'row'>
     <%=f.label :email, "Email"%>

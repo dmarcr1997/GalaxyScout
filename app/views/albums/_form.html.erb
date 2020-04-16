@@ -1,4 +1,5 @@
 <div class='new_alb_form'>
+<%= render partial: 'users/errors', locals: {item: album}%>
 <%= form_for(album) do |f|%>
     <%=f.label :title, "Title"%>
     <%=f.text_field :title%>

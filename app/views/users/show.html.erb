@@ -16,6 +16,9 @@
 <%if !current_user.albums.empty? || !@albums.empty?%>
     <%=render partial:'albums/alb', locals: {show_albums: @albums}%>
 <%else%>
+    <div class = 'container'>
+    <p> Click on Home Button to See Albums in Database or use the Search Bar to look at Albums created by other users.</p>
+    </div><br>
     <div class = 'create_new_button'>
         <%= link_to "No Albums Yet. Create One.", new_album_path%>
     </div>

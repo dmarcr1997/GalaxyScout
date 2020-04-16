@@ -5,11 +5,11 @@ class UsersController < ApplicationController
     end
 
     def create
-        if auth['info']
+        if !auth.nil?
             facebook_sign
         else
             @user = User.new(user_params)
-            if @user.username == "admin"
+            if @user.name == "admin"
                 flash[:alert] = "Cannot use admin as username" 
                 render 'new'
             elsif @user.save

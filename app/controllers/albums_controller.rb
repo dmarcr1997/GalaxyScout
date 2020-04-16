@@ -69,8 +69,8 @@ class AlbumsController < ApplicationController
         if @album.user != current_user 
             redirect_to user_path(current_user)
         else
-            Album.delete(@album)
-            redirect_to albums_path
+            @album.destroy
+            redirect_to user_path(current_user)
         end
     end    
     

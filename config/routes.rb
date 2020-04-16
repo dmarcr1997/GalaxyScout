@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
   get '/users/:id', to:'users#show', as:'user'
   get '/', to:'sessions#show'
-  get '/albums/:id/delete', to:'albums#destroy', as: 'delete_album'
+  get '/albums/:id/delete', to:'albums#destroy'
   get '/auth/facebook/callback' => 'sessions#create'
   resources :albums do 
     resources :galaxies, only: [:index, :new]

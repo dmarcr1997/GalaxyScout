@@ -33,7 +33,7 @@
         <%if current_user%>
           <a class ="active" href=<%=albums_path%>><i class = "fa fa-home"></i></a>
           <a href=<%=user_path(current_user)%>><i class="fa fa-user-circle"></i></a>
-          <a href=<%=new_album_path%>><i class="fa fa-paper-plane"></i></a>
+          <a href=<%=new_album_path%>><i class="fa fa-plus-circle"></i></a>
           <a><i class='fa fa-search'>
           <%if current_page?(user_path(current_user))%>
             <%=form_tag user_path(current_user), method: "get" do%>
