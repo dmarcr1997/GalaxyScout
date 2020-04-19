@@ -25,7 +25,5 @@ class SessionsController < ApplicationController
         session.delete :user_id
         redirect_to signin_path
     end
-
-    private
   
 end

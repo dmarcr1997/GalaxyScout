@@ -31,15 +31,11 @@ class AlbumsController < ApplicationController
     end
 
     def create
+        # raise params.inspect
         @album = Album.new(album_params)
         @album.user = current_user
         if @album.save
-            if !@album.options.include?("Other")
-                session[:album_id] = @album.id
-                set_relations(@album)
-            else 
-                redirect_to album_path(@album)
-            end
+            tag_relation_conditional(params, @album)
         else
             render 'new'
         end
@@ -53,12 +49,7 @@ class AlbumsController < ApplicationController
         @album = Album.find_by(:id => params[:id])
         @album.update(album_params)
         if @album.save
-            if !@album.options.include?("Other")
-                session[:album_id] = @album.id
-                set_relations(@album)
-            else
-                redirect_to album_path(@album)
-            end
+           tag_relation_conditional(params, @album)
         else            
             render 'edit'
         end
@@ -77,5 +68,21 @@ class AlbumsController < ApplicationController
     private
     def album_params
         params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href, :options)
+    end
+
+    def assign_existing(params)
+        true if (!params[:album][:planet_ids].empty? || !params[:album][:galaxy_ids].empty? || !params[:album][:space_obj_ids].empty?)
+    end
+
+    def tag_relation_conditional(params, album)
+        if (album.options != "Other" || !album.options.nil?) && !assign_existing(params)
+            set_new_relation(album)
+        elsif assign_existing(params) && (album.options == ("Other") || album.options.nil?)
+            set_relation(params[:album], album)
+        elsif (album.options != "Other" || !album.options.nil?) && assign_existing(params)
+            set_both_relations(params[:album], album)
+        else
+            redirect_to album_path(album)
+        end
     end
 end

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :require_login, :search_album, :set_relations, :categories, :search_user_albums, :facebook_sign
+    helper_method :current_user, :require_login, :search_album, :set_new_relation, :set_relation, :set_both_relations, :categories, :search_user_albums, :facebook_sign
     def current_user
         User.find_by(id: session[:user_id])
     end
@@ -19,12 +19,59 @@ class ApplicationController < ActionController::Base
     end 
     
 
-    def set_relations(album)
+    def set_new_relation(album)
         if album.options == "Galaxy"
             redirect_to "/albums/#{album.id}/galaxies/new"
         elsif album.options == "Space Object"
             redirect_to "/albums/#{album.id}/space_objs/new"
         else
+            redirect_to "/albums/#{album.id}/planets/new"
+        end
+    end
+
+    def set_relation(params, album)
+        if params[:planet_ids]
+            planet = Planet.find_by(:id => params[:planet_ids])
+            if !planet.nil?
+                album.planets << planet
+            end
+        elsif params[:galaxy_ids]
+            galaxy = Galaxy.find_by(:id => params[:galaxy_ids])
+            if !galaxy.nil?
+                album.galaxies << galaxy
+            end
+        else
+            space_obj = SpaceObj.find_by(:id => params[:space_obj_ids])
+            if !space_obj.nil?
+                album.space_objs << space_obj
+            end
+        end
+        redirect_to album_path(album)
+    end
+
+    def set_both_relations(params, album)
+        if params[:planet_ids]
+            planet = Planet.find_by(:id => params[:planet_ids])
+            if !planet.nil?
+                album.planets << planet
+            end
+        elsif params[:galaxy_ids]
+            galaxy = Galaxy.find_by(:id => params[:galaxy_ids])
+            if !galaxy.nil?
+                album.galaxies << galaxy
+            end
+        else
+            space_obj = SpaceObj.find_by(:id => params[:space_obj_ids])
+            if !space_obj.nil?
+                album.space_objs << space_obj
+            end
+        end
+        
+        if album.options == "Galaxy"
+            redirect_to "/albums/#{album.id}/galaxies/new"
+        elsif album.options == "Space Object"
+            redirect_to "/albums/#{album.id}/space_objs/new"
+        elsif album.options == "Planet"
             redirect_to "/albums/#{album.id}/planets/new"
         end
     end
