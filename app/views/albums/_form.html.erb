@@ -1,5 +1,5 @@
 <div class='new_alb_form'>
-<%= render partial: 'users/errors', locals: {item: album}%>
+<%= render partial:'users/errors', locals:{item: album}%>
 <%= form_for(album) do |f|%>
     <%=f.label :title, "Title"%>
     <%=f.text_field :title%>
@@ -31,7 +31,8 @@
     <%=f.collection_select :space_obj_ids, SpaceObj.all, :id, :name, :include_blank => true%>
     
     <%=f.label "Create A New Tag"%>
-    <%=f.select(:options, categories.map {|value| [value, value]}, :include_blank => true)%>
+    <%=f.label :options, "select a tag"%>
+    <%=f.select(:options, categories.map {|value| [value, value]})%>
     <br>
     <%=f.submit%>
 <%end%>

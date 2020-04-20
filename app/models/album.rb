@@ -15,15 +15,19 @@ class Album < ApplicationRecord
     def self.new_albums
         @api = Api.new
         @items = @api.fetch("")
-        @all_items = @items["collection"]["items"]
-        Album.set_hash(@all_items, false)
+        if !@items.nil?
+            @all_items = @items["collection"]["items"]
+            Album.set_hash(@all_items, false)
+        end
     end
 
     def self.search_albums(search)
-        @api = Api.new     
+        @api = Api.new       
         @items = @api.fetch("#{search}")
-        @all_items = @items["collection"]["items"]
-        Album.set_hash(@all_items, true)
+        if !@items.nil?
+            @all_items = @items["collection"]["items"]
+            Album.set_hash(@all_items, true)
+        end
     end
 
     private
@@ -33,18 +37,20 @@ class Album < ApplicationRecord
         end
         admin = User.find_by(id: 1)
         admin.albums.delete_all
-        items.each do |i|
+        items.each do |i|  
             image_hash = {}
-            image_hash["title"] = i["data"][0]["title"]
-            image_hash["date"] = i["data"][0]["date_created"]
-            image_hash["center"] = i["data"][0]["center"]
-            image_hash["creator"] = i["data"][0]["secondary_creator"]
+            if i["links"].present?
+                image_hash["href"] = i["links"][0]["href"] 
+            end
+            image_hash["title"] = i["data"][0]["title"] 
+            image_hash["date"] = i["data"][0]["date_created"]  
+            image_hash["center"] = i["data"][0]["center"] 
+            image_hash["creator"] = i["data"][0]["secondary_creator"] 
             image_hash["description"] = i["data"][0]["description"] 
             image_hash["nasa_id"] = i["data"][0]["nasa_id"]
-            image_hash["href"] = i["links"][0]["href"]
-            album = Album.new(image_hash)
-            album.user = admin 
-            album.save
+            album = Album.new(image_hash) 
+            album.user = admin
+            album.save    
             if s == true
                 break if count == 20
                 count +=1

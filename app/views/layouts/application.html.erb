@@ -9,57 +9,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-      <% if flash[:alert]%>
-        <%  flash.keys.each do |type| %>
-          <div class='alert'>
-          <div data-alert class="flash <%= type %> alert-box radius">
-            <%= flash[type] %>
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          </div>
-        <% end %>
-  
-      <%end%>
+    <% if flash[:alert]%>
+      <%  flash.keys.each do |type| %>
+        <div class='alert'>
+        <div data-alert class="flash <%= type %> alert-box radius">
+          <%= flash[type] %>
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+      <% end %>
+
+    <%end%>
+  </div>
+  <div class = 'header'>
+    <%=image_tag("homepag.jpg")%>
+    <div class = 'header_text'>
+      <h1><i class = 'fa fa-rocket'></i> Galaxy Scout</h1>
     </div>
-    <div class = 'header'>
-      <%=image_tag("homepag.jpg")%>
-      <div class = 'header_text'>
-        <h1><i class = 'fa fa-rocket'></i> Galaxy Scout</h1>
-      </div>
-    </div>
-    <br>
-    <div class='icon-bar'>
-        <%if current_user%>
-          <a class ="active" href=<%=albums_path%>><i class = "fa fa-home"></i></a>
-          <a href=<%=user_path(current_user)%>><i class="fa fa-user-circle"></i></a>
-          <a href=<%=new_album_path%>><i class="fa fa-plus-circle"></i></a>
-          <a><i class='fa fa-search'>
-          <%if current_page?(user_path(current_user))%>
-            <%=form_tag user_path(current_user), method: "get" do%>
-              <%=text_field_tag :search%>
-              <%=submit_tag "Search User Albums", :style => "display: none;"%>
-            <%end%>
-          <%else%>
-            <%=form_tag albums_path, method: "get" do%>
-              <%=text_field_tag :search%>
-              <%=submit_tag "Search Database", :style => "display: none;"%>
-            <%end%>
+  </div>
+  <br>
+  <div class='icon-bar'>
+      <%if session[:user_id]%>
+        <a class ="active" href=<%=all_albums_path%>><i class = "fa fa-home"></i></a>
+        <a href=<%=user_path(current_user)%>><i class="fa fa-user-circle"></i></a>
+        <a href=<%=new_album_path%>><i class="fa fa-plus-circle"></i></a>
+        <a><i class='fa fa-search'>
+        <%if current_page?(user_path(current_user))%>
+          <%=form_tag user_path(current_user), method: "get" do%>
+            <%=text_field_tag "search"%>
+            <%=submit_tag "Search User Albums", :style => "display: none;"%>
           <%end%>
-          </i></a>
-          <a href=<%=logout_path%>><i class ="fa fa-user-times"></i></a>
         <%else%>
-          <a href='/'><i class ="fa fa-home"></i></a>
-          <a href=<%=signin_path%>><i class ="fa fa-user-circle"></i></a>
-          <a href=<%=signup_path%>><i class="fa fa-vcard"></i></a>
+          <%=form_tag albums_path, method: "get" do%>
+            <%=text_field_tag "search"%>
+            <%=submit_tag "Search Database", :style => "display: none;"%>
+          <%end%>
         <%end%>
-    </div>
+        </i></a>
+        <a href=<%=logout_path%>><i class ="fa fa-user-times"></i></a>
+      <%else%>
+        <a href='/'><i class ="fa fa-home"></i></a>
+        <a href=<%=signin_path%>><i class ="fa fa-user-circle"></i></a>
+        <a href=<%=signup_path%>><i class="fa fa-vcard"></i></a>
+      <%end%>
+  </div>
 
-    
 
-    <div class = 'content'>
-      <%= yield %>
-    </div>
+
+  <div class = 'content'>
+    <%= yield %>
+  </div>
   </body>
   <footer>
   </footer>

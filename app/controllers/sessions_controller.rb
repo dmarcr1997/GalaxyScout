@@ -5,9 +5,9 @@ class SessionsController < ApplicationController
 
     def create
         if params.include?(:user)
-            @user = User.find_by(email: params[:user][:email])
+            @user = User.find_by(email: user_params[:email])
             if @user
-                redirect_to login_path unless @user.authenticate(params[:user][:password])
+                redirect_to signin_path unless @user.authenticate(user_params[:password])
                 session[:user_id] = @user.id
                 redirect_to user_path(@user)
             else
@@ -24,6 +24,11 @@ class SessionsController < ApplicationController
     def destroy
         session.delete :user_id
         redirect_to signin_path
+    end
+
+    private
+    def user_params
+        params.require(:user).permit(:email, :password)
     end
   
 end

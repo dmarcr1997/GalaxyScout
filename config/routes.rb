@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
   get '/users/:id', to:'users#show', as:'user'
   get '/', to:'sessions#show'
-  get '/albums/:id/delete', to:'albums#destroy'
+  get '/albums', to:'albums#index', as:'all_albums'
+  get '/albums/:id/delete', to: 'albums#destroy'
   get '/auth/facebook/callback' => 'sessions#create'
   resources :albums do 
     resources :galaxies, only: [:index, :new]
@@ -16,9 +17,11 @@ Rails.application.routes.draw do
     
     resources :planets, only: [:index, :new]
   end
+
   resources :galaxies, only: [:show, :create] 
   
   resources :space_objs, only: [:show, :create]
 
   resources :planets, only: [:show, :create]
+
 end
