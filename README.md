@@ -1,6 +1,6 @@
 GalaxyScout
 
-Hello Welcome to Galaxy. This is a space picture exploreer web application that uses a NASA API as the source of the images. A user of this application can view, create, edit, and delete space pictures. The app uses Ruby on Rails and Sqlite3 
+Hello Welcome to GalaxyScout. This is a space picture exploreer web application that uses a NASA API as the source of the images. A user of this application can view, create, edit, and delete space pictures. The app uses Ruby on Rails and Sqlite3 
 
 Installation
 Fork and clone repo and then run bundle install
