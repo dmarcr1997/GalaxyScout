@@ -2,6 +2,7 @@ class AlbumsController < ApplicationController
     before_action :require_login 
 
     def index
+        @filters = ["Most Popular", "Newest", "Oldest"]
         if params.include?(:search)
             Album.search_albums(params[:search])
             admin = User.find_by(id: 1)
@@ -67,7 +68,7 @@ class AlbumsController < ApplicationController
     
     private
     def album_params
-        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href, :options)
+        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href, :options, :filter)
     end
 
 end

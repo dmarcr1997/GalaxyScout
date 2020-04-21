@@ -24,11 +24,11 @@
     <br>
     <%=f.label "Select From Existing Tags"%><br>
     <%=f.label "Galaxies"%>
-    <%=f.checkbox :galaxy_ids, Galaxy.all, :id, :name, :include_blank => true%>
+    <%=f.collection_select :galaxy_ids, Galaxy.all, :id, :name, :include_blank => true%>
     <%=f.label "Planets"%>
-    <%=f.checkbox :planet_ids, Planet.all, :id, :name, :include_blank => true%>
+    <%=f.collection_select :planet_ids, Planet.all, :id, :name, :include_blank => true%>
     <%=f.label "Space Objects"%>
-    <%=f.checkbox :space_obj_ids, SpaceObj.all, :id, :name, :include_blank => true%>
+    <%=f.collection_select :space_obj_ids, SpaceObj.all, :id, :name, :include_blank => true%>
     
     <%=f.label "Create A New Tag"%>
     <%=f.label :options, "select a tag"%>

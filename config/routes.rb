@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post '/comments', to: 'comments#create'
   get '/albums/:id/delete', to: 'albums#destroy'
   get '/auth/facebook/callback' => 'sessions#create'
-  resources :albums do 
+  resources :albums, only: [:show, :new, :create, :update] do 
     resources :comments
     resources :galaxies, only: [:index, :new]
   
