@@ -5,6 +5,8 @@ class Album < ApplicationRecord
     validates :href, presence: true
     
     belongs_to :user
+    has_many :comments
+    has_many :users, through: :comments
     has_many :album_planets 
     has_many :album_space_objs
     has_many :album_galaxies
@@ -36,7 +38,6 @@ class Album < ApplicationRecord
             count = 0
         end
         admin = User.find_by(id: 1)
-        admin.albums.delete_all
         items.each do |i|  
             image_hash = {}
             if i["links"].present?

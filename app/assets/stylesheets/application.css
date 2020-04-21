@@ -239,6 +239,29 @@ input,
   border-radius: 2em;
 }
 
+.comment_container{ 
+  text-align: center;    
+  background-color: black;
+  border-radius: 2em;
+}
+
+.comment_container input[type='submit'], textarea{
+  width: 60%;
+}
+
+.comment_container textarea{
+  padding: 5%;
+  border-radius: 2em;
+}
+
+.comment_show{
+  text-align: justify;
+}
+
+.comment_show p{
+  font-size: 1em;
+}
+
 ul.album_info {
   list-style-type: none;
 }
@@ -339,5 +362,4 @@ ul.album_info {
     line-height: 20px;
     text-decoration: none;
   } 
-
 }

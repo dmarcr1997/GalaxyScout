@@ -10,10 +10,8 @@ class ApplicationController < ActionController::Base
 
     def search_user_albums(search)
         @albums = []
-        Album.where("title like ?", "%#{search}%").each do |album|
-            if album.user_id != 20
-                @albums << album
-            end
+        Album.where("title like ?", "%#{search}%").each do |album|    
+            @albums << album
         end
         @albums
     end 
@@ -25,7 +23,7 @@ class ApplicationController < ActionController::Base
 
     def tag_relation_conditional(params, album)
         if (album.options != "Other" || !album.options.nil?) && !assign_existing(params)
-            set_new_relation(album)
+            set_new_relations(album)
         elsif assign_existing(params) && (album.options == ("Other") || album.options.nil?)
             set_relation(params[:album], album)
         elsif (album.options != "Other" || !album.options.nil?) && assign_existing(params)
@@ -85,7 +83,7 @@ class ApplicationController < ActionController::Base
             space_obj = SpaceObj.find_by(:id => params[:space_obj_ids])
             if !space_obj.nil?
                 album.space_objs << space_obj
-            end
+             end
         end
         album.save
         if album.options == "Galaxy"

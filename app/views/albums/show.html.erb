@@ -21,7 +21,30 @@
         <li>Description: <%=@album.description%></li>
         <li>Nasa/Project Id: <%=@album.nasa_id%></li>
     </ul>
-    <%= render partial: 'related', locals: {celestial_obj_1: @galaxies, celestial_obj_2: @planets, celestial_obj_3: @space_objs, album: @album}%>
+    <div class = 'comment_container'>
+        <h3>Comments:</h3>
+        <% if @comments%>
+            <div class = 'comment_show'>
+                <ul>
+                <%@comments.each do |comment|%>
+                    <li><%=comment.created_time%><br>
+                    <%=comment.user.name%>: <%=comment.content%>
+                    <%if current_user == comment.user%>
+                        <%= link_to "x", "#{@album.id}/comments/#{comment.id}", method: 'delete', data: { confirm: "Are You Sure?" }, class: 'delete_button'%>
+                    <%end%></li>
+                <%end%>
+                </ul>
+            </div>
+        <%end%>
+        <h4>New Comment</h4>
+        <%=form_for @comment, url: comments_path, method: 'post' do |f|%>
+            <%=f.hidden_field :user_id, :value => current_user.id%>
+            <%=f.hidden_field :album_id, :value => @album.id%>
+            <%=f.text_area :content%>
+            <%=f.submit%>
+        <%end%>
+        <%= render partial: 'related', locals: {celestial_obj_1: @galaxies, celestial_obj_2: @planets, celestial_obj_3: @space_objs, album: @album}%>
+    </div>
 </div>
 
 

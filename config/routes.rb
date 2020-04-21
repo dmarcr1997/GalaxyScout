@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get '/users/:id', to:'users#show', as:'user'
   get '/', to:'sessions#show'
   get '/albums', to:'albums#index', as:'all_albums'
+  post '/comments', to: 'comments#create'
   get '/albums/:id/delete', to: 'albums#destroy'
   get '/auth/facebook/callback' => 'sessions#create'
   resources :albums do 
+    resources :comments
     resources :galaxies, only: [:index, :new]
   
     resources :space_objs, only: [:index, :new]

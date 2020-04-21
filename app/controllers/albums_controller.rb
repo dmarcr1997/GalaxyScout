@@ -10,13 +10,14 @@ class AlbumsController < ApplicationController
                 flash[:alert] = "Sorry Nothing matches that search"
             end
         else
-            Album.new_albums
             @albums = Album.all.order('created_at DESC').uniq(&:title)
         end
     end
 
     def show
         @album = Album.find_by(id: params[:id])
+        @comments = Comment.sort_time(@album.comments)
+        @comment = Comment.new
         @galaxies = @album.galaxies.uniq(&:name)
         @space_objs = @album.space_objs.uniq(&:name)
         @planets = @album.planets.uniq(&:name)
@@ -27,7 +28,6 @@ class AlbumsController < ApplicationController
 
     def new
         @album = Album.new
-       
     end
 
     def create
