@@ -5,14 +5,17 @@ class AlbumsController < ApplicationController
         @filters = ["Most Popular", "Newest", "Oldest"]
         if params.include?(:search)
             Album.search_albums(params[:search])
-            admin = User.find_by(id: 1)
-            @albums = admin.albums.uniq(&:title)
+            @albums = search_user_albums(params[:search])
             if @albums.nil? || @albums.empty?
                 flash[:alert] = "Sorry Nothing matches that search"
             end
         else
             @albums = Album.all.order('created_at DESC').uniq(&:title)
         end
+        if params.include?(:filter)
+            @albums = filter_albums(params[:filter])
+        end
+
     end
 
     def show
@@ -68,7 +71,21 @@ class AlbumsController < ApplicationController
     
     private
     def album_params
-        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href, :options, :filter)
+        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href)
     end
+
+    def filter_albums(filter)
+        @albums = Album.all
+        if filter[:option] == 'Most Popular'
+           sorted_albums = @albums.order('comments_count DESC')
+       elsif filter[:option] == 'Newest'
+           sorted_albums = @albums.order('created_at DESC')
+       elsif filter[:option] == 'Oldest'
+           sorted_albums = @albums.order('created_at ASC')
+       else
+           return albums
+       end
+       return sorted_albums
+   end
 
 end

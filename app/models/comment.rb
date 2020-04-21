@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
     belongs_to :user
-    belongs_to :album
+    belongs_to :album, counter_cache: true
     def created_time
         self.created_at.strftime('%H:%M %F')
     end

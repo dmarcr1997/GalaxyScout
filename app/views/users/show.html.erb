@@ -12,10 +12,15 @@
     <%=current_user.name%>
 </h1>
 </div>
+<%= form_for :filter, :method => 'get', url: user_path(current_user) do |f| %>
+    <%= f.select(:option, @filters.map {|value| [value, value]}, include_blank: true) %>
+    <%= f.submit "Filter" %>
+<% end %>
 <br>
 <%if !current_user.albums.empty? || !@albums.empty?%>
     <%=render partial:'albums/alb', locals: {show_albums: @albums}%>
-<%else%>
+<%end%>
+<%if @albums.empty?%>
     <div class = 'container'>
     <p> Click on Home Button to See Albums in Database or use the Search Bar to look at Albums created by other users.</p>
     </div><br>

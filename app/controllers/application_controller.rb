@@ -1,8 +1,23 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :require_login, :search_album, :assign_existing, :tag_relation_conditional, :set_new_relations, :set_relation, :set_both_relations, :categories, :search_user_albums, :facebook_sign, :auth
+    helper_method :current_user, :require_login, :search_album, :assign_existing, :tag_relation_conditional, :set_new_relations, :set_relation, :set_both_relations, :categories, :search_user_albums, :facebook_sign, :auth, :filter_user_albums
     def current_user
         User.find_by(id: session[:user_id])
     end
+
+    def filter_user_albums(filter, albums)
+        sorted_albums = []
+        albums.each do |album|
+            if filter[:option] == 'Created'
+                sorted_albums << album if album.user_id == current_user.id
+            elsif filter[:option] == 'Commented'
+                sorted_albums << album if album.user_id !=current_user.id
+            else
+            end
+        end
+        return sorted_albums
+    end
+
+  
 
     def require_login
         redirect_to signin_path, alert: 'Must be Logged in to view this action' if current_user.nil?

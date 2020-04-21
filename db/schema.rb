@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_024524) do
+ActiveRecord::Schema.define(version: 2020_04_21_142509) do
 
   create_table "album_galaxies", force: :cascade do |t|
     t.integer "album_id"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_024524) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "href"
     t.integer "user_id"
-    t.text "options"
+    t.integer "comments_count"
   end
 
   create_table "comments", force: :cascade do |t|

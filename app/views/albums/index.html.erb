@@ -1,9 +1,9 @@
 <div class ='username_header'>
 <h1>Explore</h1>
 </div>
-<%= form_for :filter, ({:controller => "albums", :action => "index"}, method: "get") do %>
-    <%= select_tag :filter, options_from_collection_for_select(@filter.map {|value| [value, value]}), include_blank: true %>
-    <%= submit_tag "Filter" %>
+<%= form_for :filter, :method => 'get', url: albums_path do |f| %>
+    <%= f.select(:option, @filters.map {|value| [value, value]}, include_blank: true) %>
+    <%= f.submit "Filter" %>
 <% end %>
 <%= render partial:"alb", locals: {show_albums: @albums}%>
     
