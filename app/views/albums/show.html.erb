@@ -6,7 +6,7 @@
         <h2><%=@album.title%></h2>
     </div>
     <div class='img_buttons'>
-        <%if current_user == @album.user%>
+        <%if current_user.author.id == @album.author_id%>
             <%= link_to "Delete Album", "#{@album.id}/delete", data: { confirm: "Are You Sure?" }, class: 'delete_button'%>
             <%=link_to "Edit your album", edit_album_path(@album), class: 'edit_button'%>
         <%end%>

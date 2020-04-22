@@ -1,6 +1,7 @@
 <div class='new_alb_form'>
 <%= render partial:'users/errors', locals:{item: album}%>
 <%= form_for(album) do |f|%>
+    <%=f.hidden_field :author_id, :value => current_user.author.id%>
     <%=f.label :title, "Title"%>
     <%=f.text_field :title%>
     <br>
@@ -23,17 +24,44 @@
     <%=f.text_field :href%>
     <br>
     <%=f.label "Select From Existing Tags"%><br>
+    <%=f.label "Or create new"%>
     <%=f.label "Galaxies"%>
-    <%=f.collection_select :galaxy_ids, Galaxy.all, :id, :name, :include_blank => true%>
-    <%=f.label "Planets"%>
-    <%=f.collection_select :planet_ids, Planet.all, :id, :name, :include_blank => true%>
-    <%=f.label "Space Objects"%>
-    <%=f.collection_select :space_obj_ids, SpaceObj.all, :id, :name, :include_blank => true%>
-    
-    <%=f.label "Create A New Tag"%>
-    <%=f.label :options, "select a tag"%>
-    <%=f.select(:options, categories.map {|value| [value, value]})%>
     <br>
+    <div class = 'checkboxes'>
+    <%=f.collection_check_boxes :galaxy_ids, Galaxy.all, :id, :name, :include_blank => true%>
+    </div>
+    <%= f.fields_for :galaxies, album.galaxies.build do |galaxies_fields| %>
+        <%= galaxies_fields.text_field :name, placeholder: "Name", :include_blank => true%>
+        <%= galaxies_fields.text_area :bio, placeholder: "Bio", :include_blank => true%>
+        <%= galaxies_fields.text_field :picture_src, placeholder: "Picture source", :include_blank => true%>
+        <%= galaxies_fields.text_field :size, placeholder: "Size", :include_blank => true%>
+    <% end %>
+    
+    <%=f.label "Planets"%>
+    <br>
+    <div class = 'checkboxes'>
+    <%=f.collection_check_boxes :planet_ids, Planet.all, :id, :name, :include_blank => true%>
+    </div>
+
+    <%= f.fields_for :planets, album.planets.build do |planets_fields| %>
+        <%= planets_fields.text_field :name, placeholder: "Name", :include_blank => true%>
+        <%= planets_fields.text_area :bio, placeholder: "Bio", :include_blank => true%>
+        <%= planets_fields.text_field :picture_src, placeholder: "Picture Source", :include_blank => true%>
+        <%= planets_fields.text_field :size, placeholder: "Size", :include_blank => true%>
+    <% end %>
+    
+    <%=f.label "Space Objects"%>
+    <br>
+    <div class = 'checkboxes'>
+    <%=f.collection_check_boxes :space_obj_ids, SpaceObj.all, :id, :name, :include_blank => true%>
+    </div>
+    <%= f.fields_for :space_objs, album.space_objs.build do |space_objs_fields| %>
+        <%= space_objs_fields.text_field :name, placeholder: "Name", :include_blank => true%>
+        <%= space_objs_fields.text_area :bio, placeholder: "Bio", :include_blank => true%>
+        <%= space_objs_fields.text_field :picture_src, placeholder: "Picture Source", :include_blank => true%>
+        <%= space_objs_fields.text_field :size, placeholder: "Size", :include_blank => true%>
+    <% end %>
+    
     <%=f.submit%>
 <%end%>
 </div>

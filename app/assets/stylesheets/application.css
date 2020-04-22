@@ -298,6 +298,27 @@ ul.album_info {
   text-align: center;
 }
 
+.filter{
+  width:30%;
+  display:inline-block;
+  text-align: justify;
+}
+
+.filter select, input[type ='submit']{
+  margin-left:3%;
+}
+
+.checkboxes{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+}
+.checkboxes input[type = 'checkbox']{
+  padding: 0;
+  margin: 0;
+}
+
 @media only screen and (max-width:800px){
   body{
     font-size: 2em;

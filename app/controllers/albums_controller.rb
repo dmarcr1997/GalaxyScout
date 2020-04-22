@@ -13,7 +13,7 @@ class AlbumsController < ApplicationController
             @albums = Album.all.order('created_at DESC').uniq(&:title)
         end
         if params.include?(:filter)
-            @albums = filter_albums(params[:filter])
+            @albums = Album.filter_albums(params[:filter])
         end
 
     end
@@ -35,10 +35,11 @@ class AlbumsController < ApplicationController
     end
 
     def create
-        @album = Album.create(album_params)
-        @album.user = current_user
+        @album = Album.new(album_params)
+        @author = Author.find_by(:id => album_params[:author_id])
+        @album.author = @author
         if @album.save
-            tag_relation_conditional(params, @album)
+            redirect_to album_path(@album)
         else
             render 'new'
         end
@@ -52,7 +53,7 @@ class AlbumsController < ApplicationController
         @album = Album.find_by(:id => params[:id])
         @album.update(album_params)
         if @album.save
-            tag_relation_conditional(params, @album)
+            redirect_to album_path(@album)
         else            
             render 'edit'
         end
@@ -71,21 +72,9 @@ class AlbumsController < ApplicationController
     
     private
     def album_params
-        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href)
+        params.require(:album).permit(:title, :date, :center, :creator, :description, :nasa_id, :href, :author_id, galaxy_ids:[], galaxies_attributes: [:name, :bio, :picture_src, :size], planet_ids:[], planets_attributes: [:name, :bio, :picture_src, :size], space_obj_ids:[], space_objs_attributes: [:name, :bio, :picture_src, :size])
     end
 
-    def filter_albums(filter)
-        @albums = Album.all
-        if filter[:option] == 'Most Popular'
-           sorted_albums = @albums.order('comments_count DESC')
-       elsif filter[:option] == 'Newest'
-           sorted_albums = @albums.order('created_at DESC')
-       elsif filter[:option] == 'Oldest'
-           sorted_albums = @albums.order('created_at ASC')
-       else
-           return albums
-       end
-       return sorted_albums
-   end
+    
 
 end

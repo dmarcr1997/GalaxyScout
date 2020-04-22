@@ -12,10 +12,12 @@
     <%=current_user.name%>
 </h1>
 </div>
+<div class ='filter'>
 <%= form_for :filter, :method => 'get', url: user_path(current_user) do |f| %>
     <%= f.select(:option, @filters.map {|value| [value, value]}, include_blank: true) %>
     <%= f.submit "Filter" %>
 <% end %>
+</div>
 <br>
 <%if !current_user.albums.empty? || !@albums.empty?%>
     <%=render partial:'albums/alb', locals: {show_albums: @albums}%>

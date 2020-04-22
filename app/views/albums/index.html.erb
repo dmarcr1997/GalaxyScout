@@ -1,10 +1,12 @@
 <div class ='username_header'>
 <h1>Explore</h1>
 </div>
+<div class='filter'>
 <%= form_for :filter, :method => 'get', url: albums_path do |f| %>
     <%= f.select(:option, @filters.map {|value| [value, value]}, include_blank: true) %>
     <%= f.submit "Filter" %>
 <% end %>
+</div>
 <%= render partial:"alb", locals: {show_albums: @albums}%>
     
 

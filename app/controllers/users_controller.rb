@@ -13,6 +13,7 @@ class UsersController < ApplicationController
                 flash[:alert] = "Cannot use admin as username" 
                 render 'new'
             elsif @user.save
+                @author = Author.new(user_id: @user.id)
                 session[:user_id] = @user.id
                 redirect_to user_path(@user)
             else
@@ -29,10 +30,11 @@ class UsersController < ApplicationController
             if @albums.empty?
                 flash[:alert] = "Sorry Nothing matches that search"
             end
-        elsif params[:filter]  
-            @albums = filter_user_albums(params[:filter], current_user.albums).uniq(&:title)
         else
-            @albums = current_user.albums.order('created_at DESC').uniq(&:title)
+            @albums = current_user.all_albums
+        end
+        if params[:filter]  
+            @albums = current_user.filter_user_albums(params[:filter][:option])
         end
     end
 
